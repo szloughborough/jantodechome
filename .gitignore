@@ -1,0 +1,8 @@
+.edge-profile*/
+*.log
+*.err
+desktop.png
+mobile.png
+tablet.png
+.DS_Store
+Thumbs.db

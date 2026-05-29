@@ -1,0 +1,103 @@
+[
+  {
+    "productName": "Marble Look Peel and Stick Floor Tile",
+    "slug": "marble-look-floor-tile-mft-101",
+    "category": "Floor tile",
+    "application": [
+      "Bathroom",
+      "Kitchen",
+      "Retail",
+      "E-commerce"
+    ],
+    "style": [
+      "Marble"
+    ],
+    "material": "Vinyl / PVC",
+    "size": "12 x 12 in / custom options",
+    "thickness": "1.5-2.0 mm options",
+    "surfaceFinish": "Matte wear layer",
+    "waterproofLevelNotes": "Waterproof surface; substrate and edge sealing affect wet-area performance.",
+    "adhesiveType": "Pressure-sensitive backing",
+    "moq": "Discuss by SKU and packaging plan",
+    "leadTime": "Sample first, bulk lead time confirmed by order quantity",
+    "packagingOptions": "Retail box, barcode label, instruction insert, master carton",
+    "privateLabelSupport": true,
+    "imageGallery": [
+      "assets/catalog/floor-marble-white-ft1129.jpg"
+    ],
+    "specSheet": "Available on request",
+    "relatedProducts": [
+      "waterproof-peel-and-stick-floor-tiles",
+      "bathroom-peel-and-stick-floor-tiles"
+    ],
+    "ctaLabel": "Request Sample"
+  },
+  {
+    "productName": "Stone Look Matte Floor Tile",
+    "slug": "stone-look-floor-tile-sft-203",
+    "category": "Floor tile",
+    "application": [
+      "Kitchen",
+      "Rental renovation",
+      "Light commercial",
+      "Retail"
+    ],
+    "style": [
+      "Stone"
+    ],
+    "material": "Vinyl / PVC",
+    "size": "12 x 12 in / custom options",
+    "thickness": "1.5-2.0 mm options",
+    "surfaceFinish": "Matte textured surface",
+    "waterproofLevelNotes": "Waterproof surface for kitchens and dry-to-damp areas.",
+    "adhesiveType": "Stable self-adhesive backing",
+    "moq": "Discuss by SKU and packaging plan",
+    "leadTime": "Sample first, bulk lead time confirmed by order quantity",
+    "packagingOptions": "Retail box, color label, instruction insert",
+    "privateLabelSupport": true,
+    "imageGallery": [
+      "assets/catalog/floor-vintage-green-ft1423.jpg"
+    ],
+    "specSheet": "Available on request",
+    "relatedProducts": [
+      "kitchen-peel-and-stick-floor-tiles",
+      "vinyl-peel-and-stick-floor-tiles"
+    ],
+    "ctaLabel": "Get Quote"
+  },
+  {
+    "productName": "Gel Peel and Stick Wall Tile",
+    "slug": "gel-wall-tile-gwt-301",
+    "category": "Wall tile",
+    "application": [
+      "Kitchen backsplash",
+      "Bathroom wall",
+      "RV",
+      "E-commerce"
+    ],
+    "style": [
+      "3D",
+      "Vinyl"
+    ],
+    "material": "PVC / PET surface options",
+    "size": "12 x 12 in / custom options",
+    "thickness": "Gel surface options by series",
+    "surfaceFinish": "Gloss gel finish",
+    "waterproofLevelNotes": "Suitable for wall splash areas; ask for recommendations before direct shower use.",
+    "adhesiveType": "Self-adhesive backing",
+    "moq": "Discuss by SKU and packaging plan",
+    "leadTime": "Sample first, bulk lead time confirmed by order quantity",
+    "packagingOptions": "Retail box, barcode label, installation guide",
+    "privateLabelSupport": true,
+    "imageGallery": [
+      "assets/catalog/wall-mosaic-grey-mt1001.jpg",
+      "assets/catalog/scenario-wall-pink-bathroom-mt1385.jpg"
+    ],
+    "specSheet": "Available on request",
+    "relatedProducts": [
+      "kitchen-peel-and-stick-wall-tiles",
+      "3d-peel-and-stick-wall-tiles"
+    ],
+    "ctaLabel": "Request Samples"
+  }
+]
