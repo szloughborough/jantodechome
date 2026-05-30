@@ -1,0 +1,43 @@
+# Repository and dependency folders
+.git/
+.github/
+node_modules/
+
+# Local logs, previews, and browser profiles
+*.log
+*.err
+desktop.png
+mobile.png
+tablet.png
+.edge-profile*/
+
+# Environment and secret files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Source/design media that should not be uploaded as Cloudflare assets
+picture/
+product picture/
+*.psd
+*.ai
+*.sketch
+*.fig
+*.xd
+*.zip
+*.rar
+*.7z
+
+# Large raw media formats
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.tif
+*.tiff
+*.raw

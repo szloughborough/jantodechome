@@ -1,8 +1,12 @@
 .edge-profile*/
+node_modules/
+public/
 *.log
 *.err
 desktop.png
 mobile.png
 tablet.png
+.env
+.env.*
 .DS_Store
 Thumbs.db
