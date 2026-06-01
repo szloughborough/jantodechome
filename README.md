@@ -54,6 +54,65 @@ The repository root contains source files, product source images, scripts, and `
 public
 ```
 
+This repository also includes `wrangler.toml`:
+
+```toml
+name = "jantodechome"
+compatibility_date = "2026-06-01"
+pages_build_output_dir = "public"
+```
+
+That config tells Cloudflare that the deployable static assets are in `public/`.
+
+## Deploy From Cloudflare.com
+
+Recommended option: connect the GitHub repository to Cloudflare Pages.
+
+Use:
+
+```text
+Framework preset: None
+Build command: npm run build
+Build output directory: public
+Root directory: /
+```
+
+If using Cloudflare Pages Direct Upload in the dashboard, do not upload the repository root. Upload the generated `public/` folder only.
+
+Steps for Direct Upload:
+
+```bash
+npm run build
+```
+
+Then upload:
+
+```text
+public/
+```
+
+Do not upload:
+
+```text
+website/
+```
+
+The `website/` root contains `.git/`, source images, scripts, and local files that are not deployable assets.
+
+## Deploy With Wrangler
+
+If Wrangler is available, run:
+
+```bash
+npm run deploy:cloudflare
+```
+
+This command builds the site and deploys only:
+
+```text
+public/
+```
+
 ## Why `.cfignore` Exists
 
 Cloudflare Workers assets have a 25 MiB asset limit. If the repository root is uploaded directly, Cloudflare may try to upload files such as:
@@ -85,6 +144,8 @@ resources/
 series/
 script.js
 styles.css
+_headers
+_redirects
 ```
 
 Source-only folders such as `picture/`, `product picture/`, `.git/`, and `scripts/` are not part of the deployed output.

@@ -7,6 +7,8 @@ const publicDir = path.join(root, "public");
 
 const deployEntries = [
   "index.html",
+  "_headers",
+  "_redirects",
   "about",
   "assets",
   "contact",
@@ -56,5 +58,28 @@ await fs.mkdir(publicDir, { recursive: true });
 for (const entry of deployEntries) {
   await copyEntry(entry);
 }
+
+await fs.writeFile(
+  path.join(publicDir, "_headers"),
+  [
+    "/*",
+    "  X-Content-Type-Options: nosniff",
+    "  Referrer-Policy: strict-origin-when-cross-origin",
+    "",
+    "/assets/*",
+    "  Cache-Control: public, max-age=31536000, immutable",
+    ""
+  ].join("\n"),
+  "utf8"
+);
+
+await fs.writeFile(
+  path.join(publicDir, "_redirects"),
+  [
+    "/home / 301",
+    ""
+  ].join("\n"),
+  "utf8"
+);
 
 console.log(`Built Cloudflare Pages output in ${path.relative(root, publicDir)}/`);
