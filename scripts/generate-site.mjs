@@ -307,6 +307,10 @@ function linkList(items) {
   return `<div class="link-list">${items.map(([label, href]) => `<a href="${href}">${esc(label)}</a>`).join("")}</div>`;
 }
 
+function footerLinkList(items) {
+  return `<nav class="footer-link-list">${items.map(([label, href]) => `<a href="${href}">${esc(label)}</a>`).join("")}</nav>`;
+}
+
 function navHtml() {
   const groups = Object.entries(nav).map(([label, items]) => `
     <div class="nav-group">
@@ -334,21 +338,30 @@ function navHtml() {
 function footerHtml() {
   return `
     <footer class="site-footer">
-      <div>
-        <strong>${brandName}</strong>
-        <p>Peel and stick floor tiles | Peel and stick wall tiles | OEM and private label programs for B2B buyers.</p>
+      <div class="footer-brand">
+        <a class="brand footer-logo" href="/">
+          <span class="brand-mark">JH</span>
+          <span>${brandName}</span>
+        </a>
+        <p>Peel and stick floor tiles, peel and stick wall tiles, OEM, ODM, and private label programs for B2B buyers.</p>
+        <div class="footer-cta-row">
+          <a href="/contact/">Request a Quote</a>
+          <a href="/contact/#sample-request">Get Samples</a>
+        </div>
       </div>
       <div class="footer-columns">
-        <div><h3>Products</h3>${linkList(nav.Products)}</div>
-        <div><h3>Applications</h3>${linkList(nav.Applications)}</div>
-        <div><h3>Resources</h3>${linkList(nav.Resources)}</div>
+        <div><h3>Products</h3>${footerLinkList(nav.Products)}</div>
+        <div><h3>Applications</h3>${footerLinkList(nav.Applications)}</div>
+        <div><h3>Resources</h3>${footerLinkList(nav.Resources)}</div>
         <div>
           <h3>Contact</h3>
-          <a href="mailto:${salesEmail}">${salesEmail}</a>
-          <a href="mailto:${adminEmail}">${adminEmail}</a>
-          <a href="tel:${phone}">${phone}</a>
-          <a href="/contact/">Send Inquiry</a>
-          <a href="/contact/#catalog-download">Download Catalog</a>
+          <nav class="footer-link-list">
+            <a href="mailto:${salesEmail}">${salesEmail}</a>
+            <a href="mailto:${adminEmail}">${adminEmail}</a>
+            <a href="tel:${phone}">${phone}</a>
+            <a href="/contact/">Send Inquiry</a>
+            <a href="/contact/#catalog-download">Download Catalog</a>
+          </nav>
         </div>
       </div>
       <p class="copyright">Copyright 2026 ${companyName}. All rights reserved.</p>
