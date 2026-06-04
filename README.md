@@ -46,6 +46,38 @@ Root directory: /
 Node.js version: 20 or later
 ```
 
+## Inquiry Form Email Setup
+
+The contact, quote, sample request, and catalog forms submit to a Cloudflare Pages Function:
+
+```text
+/api/inquiry
+```
+
+The function sends form submissions to:
+
+```text
+admin@jantodechome.com
+```
+
+Email delivery uses the Resend API. In Cloudflare Pages, add these environment variables:
+
+```text
+RESEND_API_KEY=your_resend_api_key
+INQUIRY_TO_EMAIL=admin@jantodechome.com
+INQUIRY_FROM_EMAIL=Jantodec Home <your-verified-sender@yourdomain.com>
+```
+
+`RESEND_API_KEY` is required.
+
+`INQUIRY_FROM_EMAIL` should use a sender domain verified in Resend. For testing only, Resend may allow:
+
+```text
+Jantodec Home <onboarding@resend.dev>
+```
+
+After setting environment variables, redeploy the Cloudflare Pages project.
+
 Do not set the build output directory to the repository root.
 
 The repository root contains source files, product source images, scripts, and `.git`. Cloudflare Pages must only upload the final static build folder:
@@ -149,3 +181,9 @@ _redirects
 ```
 
 Source-only folders such as `picture/`, `product picture/`, `.git/`, and `scripts/` are not part of the deployed output.
+
+Cloudflare Pages Functions are deployed from:
+
+```text
+functions/
+```

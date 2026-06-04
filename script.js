@@ -10,7 +10,6 @@ const rfqForm = document.querySelector("[data-rfq-form]");
 const formStatus = document.querySelector("[data-form-status]");
 const simpleForms = document.querySelectorAll("[data-simple-form]");
 const buyerPath = document.querySelector("[data-buyer-path]");
-const inquiryEmail = "admin@jantodechome.com";
 
 const buyerPathCopy = {
   floor: {
@@ -117,44 +116,78 @@ function validateField(field) {
   return valid;
 }
 
-function formatFormEmail(form, subjectPrefix) {
+function getFormPayload(form, subjectPrefix) {
   const formData = new FormData(form);
-  const lines = [];
+  const fields = {};
 
   formData.forEach((value, key) => {
     if (value instanceof File) {
       if (value.name) {
-        lines.push(`${key}: ${value.name} (please attach this file manually)`);
+        fields[key] = `${value.name} (file upload placeholder)`;
       }
       return;
     }
 
     if (String(value).trim()) {
-      const label = key.replace(/([A-Z])/g, " $1").replace(/^./, (char) => char.toUpperCase());
-      lines.push(`${label}: ${value}`);
+      fields[key] = String(value).trim();
     }
   });
 
   const product = formData.get("productInterest") || formData.get("product") || formData.get("buyerType") || "Peel and stick tile inquiry";
-  const subject = `${subjectPrefix}: ${product}`;
-  const body = [
-    "New website inquiry from jantodechome.com",
-    "",
-    ...lines,
-    "",
-    "Note: If a file was selected in the form, please attach it manually before sending."
-  ].join("\n");
-
-  return `mailto:${inquiryEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  return {
+    subject: `${subjectPrefix}: ${product}`,
+    formType: subjectPrefix,
+    page: window.location.href,
+    fields
+  };
 }
 
-function openInquiryEmail(form, status, subjectPrefix) {
+async function submitInquiry(form, status, subjectPrefix) {
+  const submitButton = form.querySelector('button[type="submit"]');
+  const originalButtonText = submitButton?.textContent;
+
   if (status) {
-    status.textContent = `Your email app is opening a message to ${inquiryEmail}. Please send it to complete the inquiry.`;
-    status.classList.add("success");
+    status.textContent = "Sending your inquiry...";
+    status.classList.remove("success");
   }
 
-  window.location.href = formatFormEmail(form, subjectPrefix);
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending...";
+  }
+
+  try {
+    const response = await fetch("/api/inquiry", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(getFormPayload(form, subjectPrefix))
+    });
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(result.error || "Submission failed.");
+    }
+
+    if (status) {
+      status.textContent = "Thanks. Your inquiry has been sent. Our sales team will reply within 24 hours.";
+      status.classList.add("success");
+    }
+
+    form.reset();
+    return true;
+  } catch (error) {
+    if (status) {
+      status.textContent = "The inquiry service is temporarily unavailable. Please email admin@jantodechome.com or try again later.";
+      status.classList.remove("success");
+    }
+    return false;
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = originalButtonText;
+    }
+  }
 }
 
 rfqForm?.querySelectorAll("input, select, textarea").forEach((field) => {
@@ -178,13 +211,12 @@ rfqForm?.addEventListener("submit", (event) => {
     return;
   }
 
-  const formData = new FormData(rfqForm);
-  const product = formData.get("productInterest") || "your selected product";
-  openInquiryEmail(rfqForm, formStatus, "Website quote request");
-  rfqForm.reset();
-  projectFields?.classList.remove("active");
-  formModeButtons.forEach((button) => {
-    button.classList.toggle("active", button.dataset.formMode === "quick");
+  submitInquiry(rfqForm, formStatus, "Website quote request").then((sent) => {
+    if (!sent) return;
+    projectFields?.classList.remove("active");
+    formModeButtons.forEach((button) => {
+      button.classList.toggle("active", button.dataset.formMode === "quick");
+    });
   });
 });
 
@@ -204,8 +236,7 @@ simpleForms.forEach((form) => {
     }
 
     const buttonText = form.querySelector("button")?.textContent?.trim() || "Website inquiry";
-    openInquiryEmail(form, status, buttonText);
-    form.reset();
+    submitInquiry(form, status, buttonText);
   });
 });
 

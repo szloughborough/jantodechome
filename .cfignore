@@ -23,6 +23,7 @@ tablet.png
 # Source/design media that should not be uploaded as Cloudflare assets
 picture/
 product picture/
+public/
 *.psd
 *.ai
 *.sketch
